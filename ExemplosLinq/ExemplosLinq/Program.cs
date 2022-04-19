@@ -15,7 +15,7 @@ namespace ExemplosLinq
                 new Produto() { Id = 2, CategoriaId = 3, Nome = "Short", Status = true, Valor = 100 },
                 new Produto() { Id = 3, CategoriaId = 1, Nome = "Video Game", Status = true, Valor = 100 },
                 new Produto() { Id = 4, CategoriaId = 1, Nome = "TV", Status = true, Valor = 100 },
-                new Produto() { Id = 5, CategoriaId = 1, Nome = "Maquina de Lavar", Status = true, Valor = 100 },
+                new Produto() { Id = 5, CategoriaId = 1, Nome = "Maquina de Lavar", Status = false, Valor = 100 },
                 new Produto() { Id = 6, CategoriaId = 1, Nome = "Microondas", Status = true, Valor = 100 },
                 new Produto() { Id = 7, CategoriaId = 2, Nome = "Arroz", Status = true, Valor = 100 },
                 new Produto() { Id = 8, CategoriaId = 2, Nome = "Feijão", Status = true, Valor = 100 },
@@ -30,7 +30,29 @@ namespace ExemplosLinq
             };
 
             //CRIAR CONSULTA LINQ - Expressão de Consulta
-            var resultado = from produto in listaProdutos select produto;
+            //01 - Filtrar produtos por nome
+            //var resultado = from produto in listaProdutos
+            //                where produto.Nome.ToLower() == "microONDAS".ToLower()
+            //                select produto;
+
+            //02 - Filtrar produtos pela primeira letra do nome
+            //var resultado = from produto in listaProdutos
+            //               where produto.Nome.ToLower().Substring(0,1) == "m".ToLower()
+            //                select produto;
+
+            //03 - Filtrar produtos pela primeira letra do nome e Status ativo
+            //var resultado = from produto in listaProdutos
+            //               where produto.Nome.ToLower().Substring(0,1) == "m".ToLower() &&
+            //               produto.Status == true
+            //               select produto;
+
+            //04 - Ordenar os produtos por ID
+            var resultado = from produto in listaProdutos
+                            where produto.Id > 1 && produto.Id < 6
+                           orderby produto.Id descending
+                            select produto;
+
+
 
             //EXECUTAR A CONSULTA
 
