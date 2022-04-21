@@ -30,24 +30,23 @@ namespace ExemplosLinq
             };
 
 
-            var resultado = from produto in listaProdutos select new ProdutoDto
-            {
-                Nome = produto.Nome.ToUpper(),
-                Valor = produto.Valor + 10,
-                Status = produto.Status                
-            };
-                            
+            var result = from produto in listaProdutos
+                         group produto by produto.Status into produtosAgrupados
+                         select produtosAgrupados;
+
 
 
 
             //EXECUTAR A CONSULTA
 
-            foreach (var result in resultado)
+            foreach (var item in result)
             {
-                Console.WriteLine($"{result.Nome} | {result.Valor} | {result.Status}");
+                Console.WriteLine($"{item.Key}");
+                foreach (var prod in item)
+                {
+                    Console.WriteLine($"Produto: {prod.Nome} | Categoria: {prod.CategoriaId}");
+                }
             }
-
-
 
 
             Console.WriteLine("Hello World!");
